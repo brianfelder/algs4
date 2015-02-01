@@ -1,2 +1,6 @@
 *class
 *jar
+.DS_Store
+checkstyle-5.5
+findbugs-2.0.3
+log.txt
