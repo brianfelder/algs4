@@ -15,10 +15,10 @@ public class Percolation {
         if (N <= 0)
             throw new IllegalArgumentException();
         gridWidth = N;
-        arraySize = N^2 + 2; // 0 for top virtual parent, last for bottom virtual parent
-        unionFind = new WeightedQuickUnionUF(N^2);
+        arraySize = (int)Math.round(Math.pow(N, 2)) + 2; // 0 for top virtual parent, last for bottom virtual parent
+        unionFind = new WeightedQuickUnionUF(arraySize);
         // Initialize the isOpen array; values will be false to begin.
-        isSpaceOpen = new boolean[N ^ 2];
+        isSpaceOpen = new boolean[arraySize];
         // Set up the virtual top and virtual bottom sites.
         topVirtualParentIndex = 0;
         bottomVirtualParentIndex = arraySize - 1;
@@ -82,6 +82,7 @@ public class Percolation {
         int gridIndex = indexFor(i, j);
         if (gridIndex == OUT_OF_BOUNDS_INDEX)
             return false;
+        System.out.println("isOpen -- " + i + " " + j + " arraySize: " + arraySize + " gridIndex: " + gridIndex);
         return isSpaceOpen[gridIndex];
     }
     
@@ -89,7 +90,11 @@ public class Percolation {
      * is site (row i, column j) full?
      */
     public boolean isFull(int i, int j) {
-        return ! isOpen(i, j);
+        int gridIndex = indexFor(i, j);
+        if (gridIndex == OUT_OF_BOUNDS_INDEX)
+            return false;
+        System.out.println("isFull -- " + i + " " + j + " arraySize: " + arraySize + " gridIndex: " + gridIndex);
+        return unionFind.connected(topVirtualParentIndex, gridIndex);
     }
     
     /**
