@@ -75,7 +75,8 @@ public class Percolation {
         int [] neighbors = neighborIndexes(i, j);
         for (int index = 0; index < neighbors.length; index++) {
             // connect to neighbors within the grid.
-            if (isSpaceOpen[neighbors[index]]) {
+            if ((neighbors[index] != OUT_OF_BOUNDS_INDEX) &&
+                    (isSpaceOpen[neighbors[index]])) {
                 unionFind.union(gridIndex, neighbors[index]);
             }
         }
@@ -88,7 +89,7 @@ public class Percolation {
         int gridIndex = indexFor(i, j);
         if (gridIndex == OUT_OF_BOUNDS_INDEX)
             throw new IndexOutOfBoundsException();
-        System.out.println("isOpen -- " + i + " " + j + " arraySize: " + arraySize + " gridIndex: " + gridIndex);
+        // System.out.println("isOpen -- " + i + " " + j + " arraySize: " + arraySize + " gridIndex: " + gridIndex);
         return isSpaceOpen[gridIndex];
     }
     
@@ -99,7 +100,7 @@ public class Percolation {
         int gridIndex = indexFor(i, j);
         if (gridIndex == OUT_OF_BOUNDS_INDEX)
             throw new IndexOutOfBoundsException();
-        System.out.println("isFull -- " + i + " " + j + " arraySize: " + arraySize + " gridIndex: " + gridIndex);
+        // System.out.println("isFull -- " + i + " " + j + " arraySize: " + arraySize + " gridIndex: " + gridIndex);
         return unionFind.connected(topVirtualParentIndex, gridIndex);
     }
     
@@ -107,8 +108,8 @@ public class Percolation {
      * does the system percolate?
      */
     public boolean percolates() {
-        System.out.println("percolates: " + topVirtualParentIndex + " " + bottomVirtualParentIndex
-                + " " + unionFind.find(topVirtualParentIndex) + " " + unionFind.find(bottomVirtualParentIndex));
+        //System.out.println("percolates: " + topVirtualParentIndex + " " + bottomVirtualParentIndex
+        //         + " " + unionFind.find(topVirtualParentIndex) + " " + unionFind.find(bottomVirtualParentIndex));
         return unionFind.connected(topVirtualParentIndex, bottomVirtualParentIndex);
     }
    
