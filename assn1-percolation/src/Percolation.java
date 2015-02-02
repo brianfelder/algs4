@@ -75,8 +75,7 @@ public class Percolation {
         int [] neighbors = neighborIndexes(i, j);
         for (int index = 0; index < neighbors.length; index++) {
             // connect to neighbors within the grid.
-            if ((neighbors[index] != OUT_OF_BOUNDS_INDEX) &&
-                    (isSpaceOpen[neighbors[index]])) {
+            if (isSpaceOpen[neighbors[index]]) {
                 unionFind.union(gridIndex, neighbors[index]);
             }
         }
@@ -88,7 +87,7 @@ public class Percolation {
     public boolean isOpen(int i, int j) {
         int gridIndex = indexFor(i, j);
         if (gridIndex == OUT_OF_BOUNDS_INDEX)
-            return false;
+            throw new IndexOutOfBoundsException();
         System.out.println("isOpen -- " + i + " " + j + " arraySize: " + arraySize + " gridIndex: " + gridIndex);
         return isSpaceOpen[gridIndex];
     }
@@ -99,7 +98,7 @@ public class Percolation {
     public boolean isFull(int i, int j) {
         int gridIndex = indexFor(i, j);
         if (gridIndex == OUT_OF_BOUNDS_INDEX)
-            return false;
+            throw new IndexOutOfBoundsException();
         System.out.println("isFull -- " + i + " " + j + " arraySize: " + arraySize + " gridIndex: " + gridIndex);
         return unionFind.connected(topVirtualParentIndex, gridIndex);
     }
