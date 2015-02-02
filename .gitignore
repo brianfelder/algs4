@@ -4,3 +4,6 @@
 checkstyle-5.5
 findbugs-2.0.3
 log.txt
+.idea
+*iml
+algs4
