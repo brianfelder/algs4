@@ -19,9 +19,15 @@ public class Percolation {
         unionFind = new WeightedQuickUnionUF(arraySize);
         // Initialize the isOpen array; values will be false to begin.
         isSpaceOpen = new boolean[arraySize];
+
         // Set up the virtual top and virtual bottom sites.
         topVirtualParentIndex = 0;
         bottomVirtualParentIndex = arraySize - 1;
+
+        // Open the virtual parents.
+        isSpaceOpen[topVirtualParentIndex] = true;
+        isSpaceOpen[bottomVirtualParentIndex] = true;
+
 
     }
     
@@ -69,7 +75,8 @@ public class Percolation {
         int [] neighbors = neighborIndexes(i, j);
         for (int index = 0; index < neighbors.length; index++) {
             // connect to neighbors within the grid.
-            if (neighbors[index] != OUT_OF_BOUNDS_INDEX) {
+            if ((neighbors[index] != OUT_OF_BOUNDS_INDEX) &&
+                    (isSpaceOpen[neighbors[index]])) {
                 unionFind.union(gridIndex, neighbors[index]);
             }
         }
@@ -101,6 +108,8 @@ public class Percolation {
      * does the system percolate?
      */
     public boolean percolates() {
+        System.out.println("percolates: " + topVirtualParentIndex + " " + bottomVirtualParentIndex
+                + " " + unionFind.find(topVirtualParentIndex) + " " + unionFind.find(bottomVirtualParentIndex));
         return unionFind.connected(topVirtualParentIndex, bottomVirtualParentIndex);
     }
    
