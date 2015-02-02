@@ -1,3 +1,5 @@
+import com.sun.tools.javac.util.Assert;
+
 public class Percolation {
     private int topVirtualParentIndex, bottomVirtualParentIndex;
     private WeightedQuickUnionUF unionFind;
@@ -23,7 +25,7 @@ public class Percolation {
 
     }
     
-    private int indexFor(int i, int j) {
+    protected int indexFor(int i, int j) {
         if (j < 1 || j > gridWidth)
             return OUT_OF_BOUNDS_INDEX;
         else if (i < 1)
@@ -40,12 +42,13 @@ public class Percolation {
      * @return 4 indexes in the array representing adjacent indexes.
      *         Values off the grid are of value -1.
      */
-    private int[] neighborIndexes (int i, int j) {
+    protected int[] neighborIndexes (int i, int j) {
         int[] toReturn = new int[4];
         toReturn[0] = indexFor(i-1, j); // one up
         toReturn[1] = indexFor(i+1, j); // one down
         toReturn[2] = indexFor(i, j-1); // one left
         toReturn[3] = indexFor(i, j+1); // one right
+        return toReturn;
     }
     
     /**
@@ -53,7 +56,7 @@ public class Percolation {
      */
     public void open(int i, int j) {
         int gridIndex = indexFor(i, j);
-        if (gridIndex == -1)
+        if (gridIndex == OUT_OF_BOUNDS_INDEX)
             throw new IndexOutOfBoundsException();
         // If we're already open, nothing to do.
         if (isSpaceOpen[gridIndex])
@@ -77,7 +80,7 @@ public class Percolation {
      */
     public boolean isOpen(int i, int j) {
         int gridIndex = indexFor(i, j);
-        if (gridIndex == -1)
+        if (gridIndex == OUT_OF_BOUNDS_INDEX)
             return false;
         return isSpaceOpen[gridIndex];
     }
@@ -86,19 +89,23 @@ public class Percolation {
      * is site (row i, column j) full?
      */
     public boolean isFull(int i, int j) {
-        return false;
+        return ! isOpen(i, j);
     }
     
     /**
      * does the system percolate?
      */
     public boolean percolates() {
-        return false;
+        return unionFind.connected(topVirtualParentIndex, bottomVirtualParentIndex);
     }
    
     /**
      * test client (optional)
      */
     public static void main(String[] args) {
+        Percolation perc = new Percolation(5);
+        Assert.check(perc.indexFor(1,1) == 1);
+        Assert.check(perc.indexFor(1,2) == 2);
+        Assert.check(perc.indexFor(5,5) == 25);
     }
 }
