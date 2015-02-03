@@ -1,5 +1,3 @@
-import com.sun.tools.javac.util.Assert;
-
 public class Percolation {
     private int topVirtualParentIndex, bottomVirtualParentIndex;
     private WeightedQuickUnionUF unionFind;
@@ -117,9 +115,5 @@ public class Percolation {
      * test client (optional)
      */
     public static void main(String[] args) {
-        Percolation perc = new Percolation(5);
-        Assert.check(perc.indexFor(1,1) == 1);
-        Assert.check(perc.indexFor(1,2) == 2);
-        Assert.check(perc.indexFor(5,5) == 25);
     }
 }

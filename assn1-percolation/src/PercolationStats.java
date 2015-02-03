@@ -90,7 +90,7 @@ public class PercolationStats {
     }
 
     public String toString() {
-        DecimalFormat df = new DecimalFormat("#.########");
+        DecimalFormat df = new DecimalFormat("#.#############");
         String toReturn =  "";
         toReturn +=    "mean                    = " + df.format(this.mean());
         toReturn +=  "\nstddev                  = " + df.format(this.stddev());
