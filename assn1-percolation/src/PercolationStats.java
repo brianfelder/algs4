@@ -66,7 +66,7 @@ public class PercolationStats {
         return _stddev;
     }
 
-    protected double confidenceAddend() {
+    private double confidenceAddend() {
         if (_confidenceAddend == -1) {
             _confidenceAddend = (1.96 * stddev()) / (Math.sqrt(runCount));
         }
@@ -89,7 +89,7 @@ public class PercolationStats {
         return mean() + confidenceAddend();
     }
 
-    public String toString() {
+    private String asString() {
         DecimalFormat df = new DecimalFormat("#.#############");
         String toReturn =  "";
         toReturn +=    "mean                    = " + df.format(this.mean());
@@ -108,6 +108,6 @@ public class PercolationStats {
         int gridWidth = Integer.parseInt(args[0]);
         int simCount = Integer.parseInt(args[1]);
         PercolationStats percStats = new PercolationStats(gridWidth, simCount);
-        System.out.println(percStats.toString());
+        System.out.println(percStats.asString());
     }
 }

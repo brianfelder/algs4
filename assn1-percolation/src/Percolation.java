@@ -4,7 +4,7 @@ public class Percolation {
     private int gridWidth;
     private int arraySize;
     private boolean[] isSpaceOpen;
-    public final static int OUT_OF_BOUNDS_INDEX = -1;
+    private final static int OUT_OF_BOUNDS_INDEX = -1;
 
     /**
      * create N-by-N grid, with all sites blocked
@@ -29,7 +29,7 @@ public class Percolation {
 
     }
     
-    protected int indexFor(int i, int j) {
+    private int indexFor(int i, int j) {
         if (j < 1 || j > gridWidth)
             return OUT_OF_BOUNDS_INDEX;
         else if (i < 1)
@@ -46,7 +46,7 @@ public class Percolation {
      * @return 4 indexes in the array representing adjacent indexes.
      *         Values off the grid are of value -1.
      */
-    protected int[] neighborIndexes (int i, int j) {
+    private int[] neighborIndexes (int i, int j) {
         int[] toReturn = new int[4];
         toReturn[0] = indexFor(i-1, j); // one up
         toReturn[1] = indexFor(i+1, j); // one down
