@@ -55,7 +55,8 @@ public class Deque<Item> implements Iterable<Item> {
         first.item = item;
         first.next = oldFirst;
         first.previous = null;
-        oldFirst.previous = first;
+        if (oldFirst != null)
+            oldFirst.previous = first;
         size++;
     }
 
@@ -71,7 +72,8 @@ public class Deque<Item> implements Iterable<Item> {
         last.item = item;
         last.next = null;
         last.previous = oldLast;
-        oldLast.next = last;
+        if (oldLast != null)
+            oldLast.next = last;
         size++;
     }
 
@@ -139,8 +141,9 @@ public class Deque<Item> implements Iterable<Item> {
         Deque<String> deque = new Deque<String>();
         while (!StdIn.isEmpty()) {
             String s = StdIn.readString();
+            // System.out.println("You said: " + s);
             if(s.equals("-"))
-                StdOut.print(deque.removeFirst());
+                StdOut.print(deque.removeFirst() + " ");
             else
                 deque.addFirst(s);
         }
