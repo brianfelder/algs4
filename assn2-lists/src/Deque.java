@@ -86,7 +86,8 @@ public class Deque<Item> implements Iterable<Item> {
             throw new java.util.NoSuchElementException();
         Item item = first.item;
         first = first.next;
-        first.previous = null;
+        if (first != null)
+            first.previous = null;
         size--;
         return item;
     }
@@ -100,7 +101,8 @@ public class Deque<Item> implements Iterable<Item> {
             throw new java.util.NoSuchElementException();
         Item item = last.item;
         last = last.previous;
-        last.next = null;
+        if (last != null)
+            last.next = null;
         size--;
         return item;
     }
