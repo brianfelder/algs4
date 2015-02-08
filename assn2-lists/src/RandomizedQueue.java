@@ -85,7 +85,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (emptyIndex < head || emptyIndex > tail)
             throw new ArrayIndexOutOfBoundsException();
         for (int i = emptyIndex; i < tail; i++) {
-            items[i] = items[i+1];
+            if ((i+1) < items.length)
+                items[i] = items[i+1];
         }
         items[tail] = null;
         tail--;
