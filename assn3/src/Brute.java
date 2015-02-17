@@ -46,6 +46,7 @@ public class Brute {
     }
 
     private void printPointsInLine(Point point1, Point point2, Point point3, Point point4) {
+        // TODO: Order sequence of points in line. Currently unordered.
         System.out.printf("%s -> %s -> %s -> %s\n", point1.toString(), point2.toString(),
                 point3.toString(), point4.toString());
     }
