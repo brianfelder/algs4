@@ -9,7 +9,7 @@ public class Point implements Comparable<Point> {
     public Point(int x, int y) {
         this.x = x;
         this.y = y;
-        this.SLOPE_ORDER = new SlopeComparator();
+        this.SLOPE_ORDER = new SlopeComparator(this);
     }
 
     public void draw() {
@@ -39,8 +39,10 @@ public class Point implements Comparable<Point> {
     }
 
     public double slopeTo(Point that) {
+        // Check if the points are equal.
         if (this.compareTo(that) == 0)
             return Double.NEGATIVE_INFINITY;
+        // Check if it's a vertical line.
         if ((that.x - this.x) == 0)
             return Double.POSITIVE_INFINITY;
         return ((that.y - this.y) / (that.x - this.x));
