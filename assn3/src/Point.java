@@ -45,7 +45,7 @@ public class Point implements Comparable<Point> {
         // Check if it's a vertical line.
         if ((that.x - this.x) == 0)
             return Double.POSITIVE_INFINITY;
-        return ((that.y - this.y) / (that.x - this.x));
+        return (double)((that.y - this.y) * 1.0f / (that.x - this.x) * 1.0f);
     }
 
     private class SlopeComparator implements Comparator<Point> {
