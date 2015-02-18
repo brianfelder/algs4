@@ -49,8 +49,10 @@ public class Brute {
     }
 
     private void drawAllPoints(Point[] points) {
-        StdDraw.setXscale(minX, maxX);
-        StdDraw.setXscale(minY, maxY);
+        StdDraw.setXscale(0, 32768);
+        StdDraw.setYscale(0, 32768);
+        // StdDraw.setXscale(minX, maxX);
+        // StdDraw.setYscale(minY, maxY);
         for (int i = 0; i < points.length; i++) {
             points[i].draw();
         }
@@ -86,10 +88,9 @@ public class Brute {
                         double slope14 = currentPoints[0].slopeTo(currentPoints[3]);
                         if ((slope12 == slope13) && (slope13 == slope14)) {
                             brute.printPointsInLine(currentPoints);
-                            //brute.drawLineFrom(point1, point2);
-                            //brute.drawLineFrom(point1, point3);
-                            //brute.drawLineFrom(point1, point4);
-                            //brute.drawLineFrom(point1, point2);
+                            brute.drawLineFrom(currentPoints[0], currentPoints[1]);
+                            brute.drawLineFrom(currentPoints[0], currentPoints[2]);
+                            brute.drawLineFrom(currentPoints[0], currentPoints[3]);
                         }
                     }
                 }
