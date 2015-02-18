@@ -15,6 +15,15 @@ File in format:
  */
 public class Brute {
 
+    int minX, maxX, minY, maxY;
+
+    public Brute() {
+        minX = Integer.MAX_VALUE;
+        minY = Integer.MAX_VALUE;
+        maxX = Integer.MIN_VALUE;
+        maxY = Integer.MIN_VALUE;
+    }
+
     private Point[] readPointsFromFile(String fileName) {
         assert fileName != null;
         Point[] points = null;
@@ -26,6 +35,10 @@ public class Brute {
             for (int i = 0; i < lineCount; i++) {
                 int x = input.readInt();
                 int y = input.readInt();
+                if (x < minX) minX = x;
+                if (x > maxX) maxX = x;
+                if (y < minY) minY = y;
+                if (y > maxY) maxY = y;
                 Point thePoint = new Point(x, y);
                 points[i] = thePoint;
             }
@@ -36,6 +49,8 @@ public class Brute {
     }
 
     private void drawAllPoints(Point[] points) {
+        StdDraw.setXscale(minX, maxX);
+        StdDraw.setXscale(minY, maxY);
         for (int i = 0; i < points.length; i++) {
             points[i].draw();
         }
