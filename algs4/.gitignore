@@ -1,0 +1,8 @@
+algs4*
+stdlib*
+*.jar
+checkstyle*
+findbugs*
+log.txt
+*.zip
+checkstyle-6.1
